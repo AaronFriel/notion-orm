@@ -13,7 +13,7 @@ type propNameToColumnNameType = Record<
 	{ columnName: string; type: NotionColumnTypes }
 >;
 
-/* 
+/*
 Responsible for generating `.ts` files
 */
 export async function createTypescriptFileForDatabase(
@@ -70,7 +70,8 @@ export async function createTypescriptFileForDatabase(
 		} else if (
 			columnType === "select" ||
 			columnType === "status" ||
-			columnType === "multi_select"
+			columnType === "multi_select" ||
+			columnType === "relation"
 		) {
 			// @ts-ignore
 			const options = value[columnType].options.map((x) => x.name);
@@ -78,7 +79,7 @@ export async function createTypescriptFileForDatabase(
 				createMultiOptionProp({
 					name: camelizedColumnName,
 					options,
-					isArray: columnType === "multi_select", // Union or Union Array
+					isArray: columnType === "multi_select" || columnType === "relation", // Union or Union Array
 				})
 			);
 		}

@@ -27,6 +27,8 @@ export function getCall(args: {
 		return titleCall({ title: value });
 	} else if (type === "rich_text" && typeof value === "string") {
 		return textCall({ text: value });
+	} else if (type === "relation" && Array.isArray(value)) {
+		return relationCall({ ids: value });
 	} else {
 		console.error(
 			`'[@haustle/notion-orm] ${type}' column type currently not supported`
@@ -34,7 +36,7 @@ export function getCall(args: {
 	}
 }
 
-/* 
+/*
 ======================================================
 GENERATE OBJECT BASED ON TYPE
 ======================================================
@@ -83,6 +85,12 @@ const textCall = (args: { text: string }) => {
 
 	return { rich_text };
 };
+
+const relationCall = (args: { ids: string[] }) => {
+	return {
+		relation: args.ids.map((id) => ({ id })),
+	};
+}
 
 const titleCall = (args: { title: string }) => {
 	const { title } = args;

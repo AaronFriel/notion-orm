@@ -13,18 +13,51 @@ export type NotionColumnTypes =
 	columnDiscriminatedUnionTypes[keyof columnDiscriminatedUnionTypes]["type"];
 // type SupportedQueryableNotionColumnTypes = Exclude<NotionColumnTypes, "created_by" | >
 
-export type SupportedNotionColumnTypes = Exclude<
-	NotionColumnTypes,
-	| "formula"
-	| "files"
-	| "people"
-	| "relation"
-	| "rollup"
+export type SupportedNotionColumnTypes =
+	| "checkbox"
+	// | "array"
+	// | "block_id"
+	// | "button"
 	| "created_by"
-	| "last_edited_by"
 	| "created_time"
+	// | "database_id"
+	| "date"
+	| "email"
+	// | "emoji"
+	// | "external"
+	// | "file"
+	// | "files"
+	// | "formula"
+	| "last_edited_by"
 	| "last_edited_time"
->;
+	| "multi_select"
+	| "number"
+	// | "page_id"
+	| "people"
+	| "phone_number"
+	| "relation"
+	| "rich_text"
+	// | "rollup"
+	| "select"
+	| "status"
+	| "title"
+	// | "unique_id"
+	| "url"
+	// | "verification"
+	// | "workspace";
+
+
+// Exclude<
+// 	NotionColumnTypes,
+// 	| "formula"
+// 	| "files"
+// 	| "people"
+// 	| "rollup"
+// 	| "created_by"
+// 	| "last_edited_by"
+// 	| "created_time"
+// 	| "last_edited_time"
+// >;
 
 type TextPropertyFilters = {
 	equals: string;
@@ -89,18 +122,31 @@ type DatePropertyFilters = {
 	next_year: {};
 };
 
+type UuidPropertyFilters = {
+	contains: string;
+	does_not_contain: string;
+	is_empty: true;
+	is_not_empty: true;
+};
+
 export type FilterOptions<T = []> = {
-	rich_text: TextPropertyFilters;
-	title: TextPropertyFilters;
-	number: NumberPropertyFilters;
 	checkbox: CheckBoxPropertyFilters;
-	select: SelectPropertyFilters<T>;
-	multi_select: MultiSelectPropertyFilters<T>;
-	url: TextPropertyFilters;
+	created_by: UuidPropertyFilters;
+	created_time: DatePropertyFilters;
 	date: DatePropertyFilters;
-	status: StatusPropertyFilters<T>;
 	email: TextPropertyFilters;
+	last_edited_by: UuidPropertyFilters;
+	last_edited_time: DatePropertyFilters;
+	multi_select: MultiSelectPropertyFilters<T>;
+	number: NumberPropertyFilters;
+	people: UuidPropertyFilters;
 	phone_number: TextPropertyFilters;
+	relation: UuidPropertyFilters;
+	rich_text: TextPropertyFilters;
+	select: SelectPropertyFilters<T>;
+	status: StatusPropertyFilters<T>;
+	title: TextPropertyFilters;
+	url: TextPropertyFilters;
 };
 
 /**
