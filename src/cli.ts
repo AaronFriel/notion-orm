@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import fs from "fs";
-import { createDatabaseTypes } from "./index";
+import { createDatabaseTypes } from "./index.js";
 import path from "path";
 
 async function main() {
@@ -19,9 +19,14 @@ async function main() {
 
 		console.log(path.join(projDir, "notion.config"));
 		if (notionConfigDirJS || notionConfigDirTS) {
-			const config = require(path.join(projDir, "notion.config"));
+			let config = await import(path.join(projDir, "notion.config.js"));
+
+			if ("default" in config) {
+				config = config.default;
+			}
 
 			const { databaseNames } = await createDatabaseTypes(config);
+
 			if (databaseNames.length < 0) {
 				console.log("generated no types");
 			} else {

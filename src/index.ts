@@ -3,8 +3,8 @@
  */
 
 import { Client } from "@notionhq/client";
-import { GetDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
-import { createTypescriptFileForDatabase } from "./GenerateTypes";
+import type { GetDatabaseResponse } from "@notionhq/client/build/src/api-endpoints.js";
+import { createTypescriptFileForDatabase } from "./GenerateTypes.js";
 import * as ts from "typescript";
 import fs from "fs";
 import path from "path";
