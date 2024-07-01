@@ -278,6 +278,31 @@ export class DatabaseActions<
 				}
 				return undefined;
 			}
+			case "formula": {
+				const { type } = x;
+				switch (type) {
+					case "string": {
+						const { string } = x;
+						return string;
+					}
+					case "number": {
+						const { number } = x;
+						return number;
+					}
+					case "date": {
+						const { date } = x;
+						return date;
+					}
+					case "checkbox": {
+						const { checkbox } = x;
+						return checkbox;
+					}
+					default: {
+						console.log("Not implemented yet", prop, x);
+						return undefined;
+					}
+				}
+			}
 			default: {
 				console.log("Not implemented yet", prop, x);
 				return undefined;

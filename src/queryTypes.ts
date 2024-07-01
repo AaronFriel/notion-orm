@@ -134,6 +134,13 @@ type UniqueIdPropertyFilters = {
   less_than_or_equal_to: string;
 };
 
+type FormulaFilters = {
+  checkbox: CheckBoxPropertyFilters;
+  date: DatePropertyFilters;
+  number: NumberPropertyFilters;
+  string: TextPropertyFilters;
+}
+
 export type FilterOptions<T = []> = {
   checkbox: CheckBoxPropertyFilters;
   created_by: UuidPropertyFilters;
@@ -154,7 +161,7 @@ export type FilterOptions<T = []> = {
   url: TextPropertyFilters;
   id: never;
 	unique_id: UniqueIdPropertyFilters;
-  formula: {},
+  formula: FormulaFilters;
 };
 
 /**
