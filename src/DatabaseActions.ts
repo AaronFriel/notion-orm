@@ -279,7 +279,7 @@ export class DatabaseActions<
 				return undefined;
 			}
 			case "formula": {
-				const { type } = x;
+				const { type } = x.formula;
 				switch (type) {
 					case "string": {
 						const { string } = x;
@@ -298,13 +298,13 @@ export class DatabaseActions<
 						return checkbox;
 					}
 					default: {
-						console.log("Not implemented yet", prop, x);
+						console.log("Formula type not implemented yet", prop, x);
 						return undefined;
 					}
 				}
 			}
 			default: {
-				console.log("Not implemented yet", prop, x);
+				console.log('Property not implemented yet', prop, x);
 				return undefined;
 			}
 		}
